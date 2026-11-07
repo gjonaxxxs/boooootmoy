@@ -4,9 +4,16 @@ from aiogram.filters import Command
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
-bot = Bot(token=TOKEN)
-dp = Dispatcher()
+import os
+from aiogram import Bot, Dispatcher, types
 
+# Render возьмет токен из переменной окружения TOKEN
+TOKEN = os.getenv("TOKEN")
+
+if not TOKEN:
+    raise ValueError("Не найден токен в переменных окружения!")
+
+bot = Bot(token=TOKEN)
 
 # Обработка команды /start
 @dp.message(Command("start"))
